@@ -1,0 +1,184 @@
+.App {
+  min-height: 100vh;
+
+}
+#root{
+  background-color: white;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.Menu{
+  float: left;
+  margin: 5vh;
+  border-right: #282c34;
+  background-color: grey;
+}
+.Body{
+  padding-top: 10vh;
+  padding-left: 10vh;
+  padding-right: 10vh;
+}
+.Tag{
+  border: 1px solid #282c34;
+  margin: 10px;
+}
+.Item{
+  width: 50vh;
+  height: 50vh;
+  border: 1px solid black;
+  margin-right: 10px;
+  padding: 10px;
+}
+.Modal{
+  margin:10px;
+  column-count: 3;
+  column-gap :10px;
+  column-rule-color: black;
+  column-rule-style: solid;
+}
+.Itemimg{
+  height: 300px;
+  background-image:url('https://codingapple1.github.io/shop/shoes1.jpg');
+  background-size : cover;
+  background-position: center;
+}
+.SizeBtn{
+  margin-right:  10px;
+  height: 30px;
+  width: 30px;
+}
+.AddCart{
+  margin-top: 10px;
+  height: 50px;
+  width: 80vh;
+  background-color: #282c34;
+  color: white;
+}
+.Circle{
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: navy;
+  border: #282c34;
+}
+.Nav{
+  padding-left: 10vh;
+  padding-right: 10vh;
+}
+.Bg{
+  background-color: #282c34;
+}
+.Center{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.main-bg1{
+  height : 90vh;
+  background-image : url('./image/sample1.png');
+  background-size : cover;
+  background-position : center;
+}
+.main-bg2{
+  height : 90vh;
+  background-image : url('./image/sample6.png');
+  background-size : cover;
+  background-position : center;
+}
+.main-bg3{
+  height : 90vh;
+  background-image : url('./image/sample7.png');
+  background-size : cover;
+  background-position : center;
+}
+.card-container{
+  height: 700px;
+  margin: 7em;
+}
+.main-card1{
+  
+  float: left;
+  width: 70%;
+  height:50%;
+  text-align: center;
+  line-height: 50vh;
+  font-size: 20pt;
+  color: white;
+  background-image: url('./image/sample3.png');
+  background-size : cover;
+  background-position : center;
+}
+.main-card2{
+  float: right;
+  width:30%;
+  height:100%;
+  text-align: center;
+  line-height: 50vh;
+  font-size: 20pt;
+  color: white;
+  background-image: url('./image/sample2.png');
+  background-size : cover;
+  background-position : center;
+}
+.main-card3{
+ 
+  float:left;
+  width: 35%;
+  height: 50%;
+  text-align: center;
+  line-height: 50vh;
+  font-size: 20pt;
+  color: white;
+  background-image: url('./image/sample5.png');
+  background-size : cover;
+  background-position : center;
+}
+.main-card4{
+  float:left;
+  width: 35%;
+  height:50%;
+  text-align: center;
+  line-height: 50vh;
+  font-size: 20pt;
+  color: white;
+  background-image: url('./image/sample4.png');
+  background-size : cover;
+  background-position : center;
+}
+
+
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
