@@ -29,7 +29,7 @@ function Detail(props){
               <button className="SizeBtn">XL</button>
             </div>
             <div>
-              <button className="AddCart">주문하기</button>
+              <button className="AddCart">ADD TO CART</button>
             </div>
             
             <p>{'>'} DETAIL</p>

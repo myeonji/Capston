@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Carousel } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 function Home(){
@@ -7,12 +7,12 @@ function Home(){
     const handleSelect = (selectedIndex) => {
       setIndex(selectedIndex);
     };
-  
+    let [isHovering,setIsHovering]=useState(false);
     return (
         <div className="Body">
         <Carousel activeIndex={index} onSelect={handleSelect}>
           <Carousel.Item>
-            <div className='main-bg1' alt="First slide"></div>          
+            <div className='main-bg1' alt="First slide"></div> 
             <Carousel.Caption>
               <h1>NEW COLLECTION</h1>
               <p></p>
@@ -36,13 +36,30 @@ function Home(){
           </Carousel.Item>
         </Carousel>
         <div className="card-container">
-            <div onClick={()=>{navigate('/itemlist')}} className="main-card1">TRENDING</div>
-            <div onClick={()=>{navigate('/itemlist')}} className="main-card2">SS24 LOOKBOOK</div>
-            <div onClick={()=>{navigate('/itemlist')}} className="main-card3">SEASON OFF</div>
-            <div onClick={()=>{navigate('/itemlist')}} className="main-card4">SUMMER COLLECTION</div>
+            <div onMouseOver={()=>setIsHovering(true)} onMouseOut={()=>setIsHovering(false)} onClick={()=>{navigate('/itemlist')}} className="main-card1">TRENDING{isHovering==true?<Cardtext />:null}</div>
+            <div onMouseOver={()=>setIsHovering(true)} onMouseOut={()=>setIsHovering(false)} onClick={()=>{navigate('/itemlist')}} className="main-card2">SS24 LOOKBOOK{isHovering==true?<Cardtext />:null}</div>
+            <div onMouseOver={()=>setIsHovering(true)} onMouseOut={()=>setIsHovering(false)} onClick={()=>{navigate('/itemlist')}} className="main-card3">SEASON OFF{isHovering==true?<Cardtext />:null}</div>
+            <div onMouseOver={()=>setIsHovering(true)} onMouseOut={()=>setIsHovering(false)} onClick={()=>{navigate('/itemlist')}} className="main-card4">SUMMER COLLECTION{isHovering==true?<Cardtext />:null}</div>
+            
         </div>
         </div>
       );
 }
+//호버하면 페이드효과주면서 새창 띄워짐(없던게 생김)
+function Cardtext(){
+  let [fade,setFade]=useState('')
 
+  useEffect(()=>{
+    setFade('Fade')
+    return()=>{
+      setFade('')
+    }
+  },[])
+  
+  return(
+  <div className={'Test ' + fade}>
+    DISCOVER
+  </div>
+  )
+}
 export default Home;

@@ -62,6 +62,7 @@ function App() {
       {isHoveringm==true?<Menum/>:null} 
         {isHoveringw==true?<Menuw onMouseOut={handleMouseOutw}/>:null} 
       <Routes>
+      <Route path="*" element={<div>404없는페이지</div>}/>
         <Route path="/" element={<Home/>}/>
         <Route path ="/itemlist" element={<Itemlist/>}/>
         <Route path="/detail/:id" element={<Detail shoes={shoes}/>}>
@@ -70,14 +71,13 @@ function App() {
           <Route  path="member" element={<Member/>}/> 
           <Route path="location" element={<Location/>}></Route>
         </Route>
-        <Route path="*" element={<div>404없는페이지</div>}/>
       </Routes> 
       
       </div>    
   );
 }
 
-function Menum(){
+function Menuw(){
   return(
     
 <div className='Body'>
@@ -105,7 +105,7 @@ function Menum(){
   </div>
   )
 }
-function Menuw(){
+function Menum(){
   return(
 <div className='Body'>
   <div>
