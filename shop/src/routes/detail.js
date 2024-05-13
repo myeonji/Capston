@@ -18,6 +18,7 @@ function Detail(props){
           <div className="col-md-6 mt-4">
             <h4 className="pt-5">{itemId.title}</h4>
             <p>{itemId.content}</p>
+            <p>{itemId.color}</p>
             <p>{itemId.price}원</p>
             <p>COLOR</p>
             <div className="Circle"></div>

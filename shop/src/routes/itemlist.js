@@ -95,6 +95,7 @@ function Modal(){
         <div className="Circle"></div>
         <h4>{props.shoes.title}</h4>
         <p>{props.shoes.price}</p>
+        <p>{props.shoes.color}</p>
       </div>
     
     
