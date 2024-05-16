@@ -10,12 +10,11 @@ function Itemlist(){
     
     return(
     <div className='Body'>
-        <h4>OUTWEAR</h4> 
+        <h4>shoes</h4> 
         <hr></hr>
         <button onClick={()=>setModal(!modal)} aria-expanded="false" aria-controls="refinement-wrap">Filters &amp; sort by<i></i></button>
         {modal==true?<Modal></Modal>:null}
         <hr></hr>
-        <button className="Tag">태그 X</button>
         <div className='grid'>
           {shoes.map((i,a)=>(<Card shoes={shoes[a]} i={a}></Card>))}
             
@@ -71,7 +70,7 @@ function Modal(){
             </ul>
           </div></Col>
         </Row>
-        <div className='Modalcontent' ><button>Apply</button>  </div>
+        <div className='Modalcontent'><button><b>Apply</b></button></div>
         
       </div>
     )
@@ -92,10 +91,10 @@ function Modal(){
     return(
       <div className="Item" onClick={()=>{navigate('/detail'+ '/'+ String(parseInt(props.i)))}}>
         <img src={'https://codingapple1.github.io/shop/shoes' + String(parseInt(props.i+1)) +'.jpg'} width="80%"/>
-        <div className="Circle"></div>
+        <div className={"Circle "+props.shoes.color}></div>
         <h4>{props.shoes.title}</h4>
-        <p>{props.shoes.price}</p>
-        <p>{props.shoes.color}</p>
+        <p>₩ {props.shoes.price}</p>
+        
       </div>
     
     

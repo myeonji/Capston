@@ -37,7 +37,7 @@ let cart = createSlice({
   
       {
         id : 3,
-        title : "4번",
+        title : "Blue Flower",
         content : "Born in the States",
         price : 130000,
         color : "Blue",
@@ -47,10 +47,10 @@ let cart = createSlice({
   
       {
         id : 4,
-        title : "5번",
+        title : "Red Flower",
         content : "Born in the States",
         price : 130000,
-        color : "Green",
+        color : "Red",
         count : 1,
         img : "https://codingapple1.github.io/shop/shoes5.jpg"
       },

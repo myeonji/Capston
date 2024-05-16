@@ -2,9 +2,24 @@
   min-height: 100vh;
 
 }
+.Fixed{
+  position: fixed;
+}
 #root{
   background-color: white;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+button{
+  background-color: inherit;
+  border:none;
+  padding: 10px;
+}
+button :hover{
+  background-color: lightgrey;
+  padding:2px;
+  border:none;
+  border-radius: 20%;
+  
 }
 li{
   list-style: none;
@@ -47,6 +62,10 @@ ul{
   display: flex;
   justify-content: space-between;
 }
+.right{
+  display: flex;
+  justify-content: right;
+}
 
 .cart-list{
   margin: 10px;
@@ -88,7 +107,8 @@ ul{
   height: 50vh;
   margin-right: 10px;
   margin: 5px;
-  padding: 10px;
+  padding: 15px;
+  border-radius: 10%;
   background-color: rgb(241, 241, 241);
 }
 .Modal{
@@ -118,6 +138,7 @@ ul{
   background-position: center;
 }
 .SizeBtn{
+  
   margin-right:  10px;
   height: 30px;
   width: 30px;
@@ -128,14 +149,43 @@ ul{
   width: 50vh;
   background-color: #282c34;
   color: white;
+
 }
+
 .Circle{
   width: 25px;
   height: 25px;
   border-radius: 50%;
-  background-color: navy;
-  border: #282c34;
+  padding: 10px;
+  margin : 10px;
+  
+  border: #282c34 solid 2px;
 }
+.Red{
+  background-color: red;
+}
+.Black{
+  background-color: black;
+}
+.White{
+  background-color: white;
+}
+.Blue{
+  background-color: blue;
+}
+.Green{
+  background-color: green;
+}
+.Grey{
+  background-color: grey;
+}
+.Yellow{
+  background-color: Yellow;
+}
+.Brown{
+  background-color: Brown;
+}
+
 .Nav{
   padding-left: 10vh;
   padding-right: 10vh;

@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom"
 import {Row,Col} from "react-bootstrap"
 import { useDispatch } from "react-redux";
 import { addItem } from "../store/store.js"
-
+import { useState } from "react";
 
 function Detail(props){
 
@@ -11,11 +11,15 @@ function Detail(props){
   let itemId = props.shoes.find(function(x){
     return x.id==id
   })
-  let imgUrl = "https://codingapple1.github.io/shop/shoes"+ String(parseInt(id)+1) +".jpg"
+  const Season = ["Spring","Summer","Fall","Winter"]
+  const Clothing_style = ["Classic","Modern","Casual","Vintage","Street","Minimal"] 
+  const Background_color = ["Balck","White","Green","Grey"]
+  let [size,setSize] = useState('')
+  let [select,setSelect] = useState()
 
     return(
       
-      <div className="container">
+      <div className="container Body">
         <div className="row">
           <div className="col-md-6">
             <img src={"https://codingapple1.github.io/shop/shoes"+ String(parseInt(id)+1) +".jpg"} width="100%" />
@@ -23,16 +27,17 @@ function Detail(props){
           <div className="col-md-6 mt-4">
             <h4 className="pt-5">{itemId.title}</h4>
             <p>{itemId.content}</p>
-            <p>{itemId.color}</p>
-            <p>{itemId.price}원</p>
-            <p>COLOR</p>
-            <div className="Circle"></div>
-            <p>SIZE</p>
+            <p>₩ {itemId.price}</p>
+            <div className={"Circle "+itemId.color}></div>
+            <hr></hr>
+            <h6>SIZE</h6>
             <div>
-              <button className="SizeBtn">S</button>
-              <button className="SizeBtn">M</button>
-              <button className="SizeBtn">L</button>
-              <button className="SizeBtn">XL</button>
+              <button className="SizeBtn" onClick={()=>{setSize('S')}}>S</button>
+              <button className="SizeBtn" onClick={()=>{setSize('M')}}>M</button>
+              <button className="SizeBtn" onClick={()=>{setSize('L')}}>L</button>
+              <button className="SizeBtn" onClick={()=>{setSize('XL')}}>XL</button>
+              <hr></hr>
+              <p>Selected Size : {size}</p>
             </div>
             <div>
               <button className="AddCart" onClick={()=>{
@@ -49,7 +54,7 @@ function Detail(props){
           <hr></hr>
           <h4>RECOMMENDED</h4>
           <Row>
-            <Col><Card/></Col>
+            <Col><Card color={itemId.color}/></Col>
             <Col>2</Col>
             <Col>3</Col>
           </Row>
@@ -69,14 +74,29 @@ function Detail(props){
             <Col>
             <div>
               <Row xs={1}>
-                <Col>Weather/Season<div></div></Col>
-                <Col>Style</Col>
-                <Col>Background Color</Col>
+                <Col>
+                
+                <div>
+                  <RadioButtonGroup options={Season} groupName="Season"></RadioButtonGroup>
+                  </div>
+                </Col>
+                <Col>
+               
+                <div>
+                  <RadioButtonGroup options={Clothing_style} groupName="Style"></RadioButtonGroup>
+                  </div>
+                </Col>
+                <Col>
+                
+                <div>
+                  <RadioButtonGroup options={Background_color} groupName="Background Color"></RadioButtonGroup>
+                </div>
+                </Col>
               </Row>
             </div>
               </Col>
           </Row>
-          //여따가 Ai Pick
+          
         </div>
         <div>
           <hr></hr>
@@ -105,16 +125,57 @@ function Detail(props){
     )
   }
 
-  function Card(){
+  function Card(props){
     return(
       <div className="Item">
         <img src='https://codingapple1.github.io/shop/shoes1.jpg' width="80%"></img>
-        <div className="Circle"> </div>
+        <div className={"Circle "+props.color}></div>
         <p>상품명</p>
         <p>가격</p>
       </div>
     )
   }
+
+  function RadioButtonGroup({ options, groupName }) {
+    const [selectedOption, setSelectedOption] = useState('');
+  
+    const handleOptionChange = (event) => {
+      setSelectedOption(event.target.value);
+    };
+  
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      console.log(`Selected option for ${groupName}: ${selectedOption}`);
+    };
+  
+    const renderRadioButtons = (options) => {
+      return options.map((option, index) => (
+        <div key={index}>
+          <label>
+            <input
+              type="radio"
+              name={groupName}
+              value={option}
+              checked={selectedOption === option}
+              onChange={handleOptionChange}
+            />
+            {option}
+          </label>
+        </div>
+      ));
+    };
+  
+    return (
+      <div>
+        <form onSubmit={handleSubmit}>
+          <h4>{groupName}</h4>
+          {renderRadioButtons(options)}
+          <button type="submit">Submit</button>
+        </form>
+        <p>Selected option: {selectedOption}</p>
+      </div>
+    );
+  }
   
 
-  export default Detail
+  export default Detail;

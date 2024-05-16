@@ -42,8 +42,8 @@ function App() {
           <Navbar.Brand href="/">Navbar</Navbar.Brand>
           <Nav className="me-auto">
             
-            <Nav.Link onMouseOver={handleMouseOverm} onMouseOut={handleMouseOutm} href="/itemlist">Men</Nav.Link>
-            <Nav.Link onMouseOver={handleMouseOverw} onMouseOut={handleMouseOutw} href="/itemlist">Women</Nav.Link>
+            <Nav.Link onMouseEnter={handleMouseOverm} onMouseLeave={handleMouseOutm} href="/itemlist">Men</Nav.Link>
+            <Nav.Link onMouseEnter={handleMouseOverw} onMouseLeave={handleMouseOutw} href="/itemlist">Women</Nav.Link>
             
           </Nav>
           <Row>
@@ -55,13 +55,13 @@ function App() {
               aria-label="Search"/>
           </Form></Col>             
         </Row>
-          <button><FaUser/></button>
-          <button><FaHeart/></button>
-          <button onClick={()=>{navigate('/cart')}}><FaShoppingBag/></button>
+          <button><FaUser size={20}/></button>
+          <button><FaHeart size={20}/></button>
+          <button onClick={()=>{navigate('/cart')}}><FaShoppingBag size={20}/></button>
         </Container>
       </Navbar>
       {isHoveringm==true?<Menum/>:null} 
-        {isHoveringw==true?<Menuw onMouseOut={handleMouseOutw}/>:null} 
+        {isHoveringw==true?<Menuw/>:null} 
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path ="/itemlist" element={<Itemlist/>}/>
