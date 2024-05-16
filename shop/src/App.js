@@ -42,8 +42,8 @@ function App() {
           <Navbar.Brand href="/">Navbar</Navbar.Brand>
           <Nav className="me-auto">
             
-            <Nav.Link onMouseOver={handleMouseOverm} onMouseOut={handleMouseOutm} href="itemlist">Men</Nav.Link>
-            <Nav.Link onMouseOver={handleMouseOverw} onMouseOut={handleMouseOutw} href="itemlist">Women</Nav.Link>
+            <Nav.Link onMouseOver={handleMouseOverm} onMouseOut={handleMouseOutm} href="/itemlist">Men</Nav.Link>
+            <Nav.Link onMouseOver={handleMouseOverw} onMouseOut={handleMouseOutw} href="/itemlist">Women</Nav.Link>
             
           </Nav>
           <Row>
@@ -57,13 +57,12 @@ function App() {
         </Row>
           <button><FaUser/></button>
           <button><FaHeart/></button>
-          <button><FaShoppingBag/></button>
+          <button onClick={()=>{navigate('/cart')}}><FaShoppingBag/></button>
         </Container>
       </Navbar>
       {isHoveringm==true?<Menum/>:null} 
         {isHoveringw==true?<Menuw onMouseOut={handleMouseOutw}/>:null} 
       <Routes>
-      <Route path="*" element={<div>404없는페이지</div>}/>
         <Route path="/" element={<Home/>}/>
         <Route path ="/itemlist" element={<Itemlist/>}/>
         <Route path="/detail/:id" element={<Detail shoes={shoes}/>}>
@@ -73,6 +72,7 @@ function App() {
           <Route path="location" element={<Location/>}></Route>
         </Route>
         <Route path="/cart" element={<Cart/>}></Route>
+        <Route path="*" element={<div><h1>404없는페이지</h1></div>}/>
       </Routes> 
       
       </div>    

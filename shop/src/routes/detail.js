@@ -1,12 +1,17 @@
 import { useParams } from "react-router-dom"
 import {Row,Col} from "react-bootstrap"
+import { useDispatch } from "react-redux";
+import { addItem } from "../store/store.js"
+
 
 function Detail(props){
 
+  let dispatch = useDispatch()
   let {id} = useParams();
   let itemId = props.shoes.find(function(x){
     return x.id==id
   })
+  let imgUrl = "https://codingapple1.github.io/shop/shoes"+ String(parseInt(id)+1) +".jpg"
 
     return(
       
@@ -30,7 +35,9 @@ function Detail(props){
               <button className="SizeBtn">XL</button>
             </div>
             <div>
-              <button className="AddCart">ADD TO CART</button>
+              <button className="AddCart" onClick={()=>{
+                dispatch(addItem({id : id, title : itemId.title, price : itemId.price, count : 1, img : "https://codingapple1.github.io/shop/shoes"+ String(parseInt(id)+1) +".jpg"}))
+            }}>ADD TO CART</button>
             </div>
             
             <p>{'>'} DETAIL</p>
@@ -59,7 +66,15 @@ function Detail(props){
               <Col>4 of 4</Col>
             </Row>
             </Col>
-            <Col>2!</Col>
+            <Col>
+            <div>
+              <Row xs={1}>
+                <Col>Weather/Season<div></div></Col>
+                <Col>Style</Col>
+                <Col>Background Color</Col>
+              </Row>
+            </div>
+              </Col>
           </Row>
           //여따가 Ai Pick
         </div>
@@ -77,7 +92,6 @@ function Detail(props){
                 <p>상품명<br/>
                 option<br></br>
                 Size : M</p>
-                
               </Col>
           </Row>
           //상품리뷰

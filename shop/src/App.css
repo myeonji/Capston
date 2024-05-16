@@ -43,7 +43,26 @@ ul{
     opacity: 1;
   }
 }
+.between{
+  display: flex;
+  justify-content: space-between;
+}
 
+.cart-list{
+  margin: 10px;
+  padding: 10px;
+
+  border: #282c34 solid 1px;
+  
+
+}
+.cart-pay{
+  margin: 10px;
+  padding: 10px;
+  background-color: lightgrey;
+  border: #282c34 solid 1px;
+
+}
 .Menu{
   float: left;
   margin: 5vh;
@@ -104,9 +123,9 @@ ul{
   width: 30px;
 }
 .AddCart{
-  margin-top: 10px;
+  margin: 10px;
   height: 50px;
-  width: 80vh;
+  width: 50vh;
   background-color: #282c34;
   color: white;
 }
