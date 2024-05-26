@@ -3,7 +3,6 @@ import {Row,Col} from "react-bootstrap"
 import { useDispatch } from "react-redux";
 import { addItem } from "../store/store.js"
 import { useState } from "react";
-import axios from "axios";
 
 function Detail(props){
 
@@ -121,7 +120,7 @@ function Detail(props){
           <hr></hr>
           <h4>Q&A</h4>
           //여따가 Q&A
-          <PostRequestComponent/>
+          
         </div>
       </div>
     )
@@ -179,31 +178,5 @@ function Detail(props){
     );
   }
   
-  const PostRequestComponent = () => {
-    const handlePostRequest = async () => {
-      const payload = {
-        prompt: "close-up photography of old man standing in the rain at night, in a street lit by lamps, leica 35mm summilux",
-        num_inference_steps: 4,
-        guidance_scale: 1
-      };
-  
-      try {
-        const response = await axios.post('http://localhost:3000/txt2img', payload, {
-          headers: {
-            'accept': 'image/*',
-            'Content-Type': 'application/json'
-          }
-        });
-        console.log('Response:', response.data);
-      } catch (error) {
-        console.error('Error posting data:', error);
-      }
-    };
-  
-    return (
-      <div>
-        <button onClick={handlePostRequest}>Send POST Request</button>
-      </div>
-    );
-  };
+ 
   export default Detail;
