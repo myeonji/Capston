@@ -8,6 +8,7 @@ import About from './routes/about.js'
 import Itemlist from './routes/itemlist.js'
 import Home from './routes/home.js'
 import Cart from './routes/cart.js'
+import Test from './routes/test.js'
 import { FaUser,FaHeart,FaShoppingBag } from "react-icons/fa";
 import { BiBorderRight } from 'react-icons/bi';
 
@@ -71,6 +72,7 @@ function App() {
           <Route  path="member" element={<Member/>}/> 
           <Route path="location" element={<Location/>}></Route>
         </Route>
+        <Route path="/test" element={<Test/>}></Route>
         <Route path="/cart" element={<Cart/>}></Route>
         <Route path="*" element={<div><h1>404없는페이지</h1></div>}/>
       </Routes> 
