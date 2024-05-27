@@ -16,12 +16,20 @@ function Detail(props){
   const Clothing_style = ["Classic","Modern","Casual","Vintage","Street","Minimal"] 
   const Background_color = ["Balck","White","Green","Grey"]
 
-  let prompt = ""
-  let [opt1,setOpt1]=useState('')//프롬프트 옵션1
-  let [opt2,setOpt2]=useState('')//프롬프트 옵션2
-  let [opt3,setOpt3]=useState('')//프롬프트 옵션3
+  var prompt = "A full-body shot of a person wearing a jacket, with their head out of the frame, on a grey solid color background."
+  var [opt1,setOpt1]=useState('')//프롬프트 옵션1
+  var [opt2,setOpt2]=useState('')//프롬프트 옵션2
+  var [opt3,setOpt3]=useState('')//프롬프트 옵션3
+
+
   function onSetOpt1(a){
     setOpt1(a);
+  }
+  function onSetOpt2(a){
+    setOpt2(a);
+  }
+  function onSetOpt3(a){
+    setOpt3(a);
   }
 
   let [size,setSize] = useState('')
@@ -76,9 +84,9 @@ function Detail(props){
             <Col>
             <Row xs={2} md={2}>
               <Col>{opt1}</Col>
-              <Col>2 of 3</Col>
-              <Col>3 of 3</Col>
-              <Col>4 of 4</Col>
+              <Col>{opt2}</Col>
+              <Col>{opt3}</Col>
+              <Col>{prompt}</Col>
             </Row>
             </Col>
             <Col>
@@ -87,19 +95,19 @@ function Detail(props){
                 <Col>
                 
                 <div>
-                  <RadioButtonGroup options={Season} groupName="Season" onSetOpt1={onSetOpt1}></RadioButtonGroup>
+                  <RadioButtonGroup options={Season} groupName="Season" onSetOpt={onSetOpt1}></RadioButtonGroup>
                   </div>
                 </Col>
                 <Col>
                
                 <div>
-                  <RadioButtonGroup options={Clothing_style} groupName="Style"></RadioButtonGroup>
+                  <RadioButtonGroup options={Clothing_style} groupName="Style" onSetOpt={onSetOpt2}></RadioButtonGroup>
                   </div>
                 </Col>
                 <Col>
                 
                 <div>
-                  <RadioButtonGroup options={Background_color} groupName="Background Color"></RadioButtonGroup>
+                  <RadioButtonGroup options={Background_color} groupName="Background Color" onSetOpt={onSetOpt3}></RadioButtonGroup>
                 </div>
                 </Col>
               </Row>
@@ -130,7 +138,7 @@ function Detail(props){
           <hr></hr>
           <h4>Q&A</h4>
           //여따가 Q&A
-          <PostRequestComponent/>
+          <PostRequestComponent opt1={opt1} opt2={opt2} opt3={opt3}/>
         </div>
       </div>
     )
@@ -147,16 +155,14 @@ function Detail(props){
     )
   }
 
-  function RadioButtonGroup({ options, groupName},props ) {
+  function RadioButtonGroup({ options, groupName, onSetOpt} ) {
     const [selectedOption, setSelectedOption] = useState('');
 
-    const onSetOpt1=()=>{
-      props.onSetOpt1(`${selectedOption}`)
-    }
 
     const handleOptionChange = (event) => {
-      setSelectedOption(event.target.value);
-      onSetOpt1()
+      const newValue = event.target.value;
+      setSelectedOption(newValue);
+      onSetOpt(newValue);
     };
   
     const handleSubmit = (event) => {
@@ -196,14 +202,14 @@ function Detail(props){
     );
   }
   
-  const PostRequestComponent = () => {
+  const PostRequestComponent = (opt1,opt2,opt3) => {
     const handlePostRequest = async () => {
       const payload = {
         prompt: "A full-body shot of a person wearing a jacket, with their head out of the frame, on a grey solid color background.",
         num_inference_steps: 4,
-        guidance_scale: 1
+        guidance_scale: 1,
       };
-  
+      console.log(payload)
       try {
         const response = await axios.post('http://localhost:3000/txt2img', payload, {
           headers: {
