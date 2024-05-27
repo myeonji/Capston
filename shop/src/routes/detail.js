@@ -3,6 +3,7 @@ import {Row,Col} from "react-bootstrap"
 import { useDispatch } from "react-redux";
 import { addItem } from "../store/store.js"
 import { useState } from "react";
+import axios from 'axios';
 
 function Detail(props){
 
@@ -14,6 +15,15 @@ function Detail(props){
   const Season = ["Spring","Summer","Fall","Winter"]
   const Clothing_style = ["Classic","Modern","Casual","Vintage","Street","Minimal"] 
   const Background_color = ["Balck","White","Green","Grey"]
+
+  let prompt = ""
+  let [opt1,setOpt1]=useState('')//프롬프트 옵션1
+  let [opt2,setOpt2]=useState('')//프롬프트 옵션2
+  let [opt3,setOpt3]=useState('')//프롬프트 옵션3
+  function onSetOpt1(a){
+    setOpt1(a);
+  }
+
   let [size,setSize] = useState('')
   let [select,setSelect] = useState()
 
@@ -65,7 +75,7 @@ function Detail(props){
           <Row>
             <Col>
             <Row xs={2} md={2}>
-              <Col>1 of 3</Col>
+              <Col>{opt1}</Col>
               <Col>2 of 3</Col>
               <Col>3 of 3</Col>
               <Col>4 of 4</Col>
@@ -77,7 +87,7 @@ function Detail(props){
                 <Col>
                 
                 <div>
-                  <RadioButtonGroup options={Season} groupName="Season"></RadioButtonGroup>
+                  <RadioButtonGroup options={Season} groupName="Season" onSetOpt1={onSetOpt1}></RadioButtonGroup>
                   </div>
                 </Col>
                 <Col>
@@ -120,7 +130,7 @@ function Detail(props){
           <hr></hr>
           <h4>Q&A</h4>
           //여따가 Q&A
-          
+          <PostRequestComponent/>
         </div>
       </div>
     )
@@ -137,18 +147,25 @@ function Detail(props){
     )
   }
 
-  function RadioButtonGroup({ options, groupName }) {
+  function RadioButtonGroup({ options, groupName},props ) {
     const [selectedOption, setSelectedOption] = useState('');
-  
+
+    const onSetOpt1=()=>{
+      props.onSetOpt1(`${selectedOption}`)
+    }
+
     const handleOptionChange = (event) => {
       setSelectedOption(event.target.value);
+      onSetOpt1()
     };
   
     const handleSubmit = (event) => {
       event.preventDefault();
       console.log(`Selected option for ${groupName}: ${selectedOption}`);
     };
-  
+
+    
+
     const renderRadioButtons = (options) => {
       return options.map((option, index) => (
         <div key={index}>
@@ -158,7 +175,8 @@ function Detail(props){
               name={groupName}
               value={option}
               checked={selectedOption === option}
-              onChange={handleOptionChange}
+              onChange={handleOptionChange}          
+               
             />
             {option}
           </label>
@@ -178,5 +196,31 @@ function Detail(props){
     );
   }
   
- 
+  const PostRequestComponent = () => {
+    const handlePostRequest = async () => {
+      const payload = {
+        prompt: "A full-body shot of a person wearing a jacket, with their head out of the frame, on a grey solid color background.",
+        num_inference_steps: 4,
+        guidance_scale: 1
+      };
+  
+      try {
+        const response = await axios.post('http://localhost:3000/txt2img', payload, {
+          headers: {
+            'accept': 'image/*',
+            'Content-Type': 'application/json'
+          }
+        });
+        console.log('Response:', response.data);
+      } catch (error) {
+        console.error('Error posting data:', error);
+      }
+    };
+  
+    return (
+      <div>
+        <button onClick={handlePostRequest}>Send POST Request</button>
+      </div>
+    );
+  };
   export default Detail;
