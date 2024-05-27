@@ -15,7 +15,7 @@ const PostRequestComponent = () => {
 
     const handlePostRequest = async () => {
       const payload = {
-        prompt: "close-up photography of old man standing in the rain at night, in a street lit by lamps, leica 35mm summilux",
+        prompt: "A full-body shot of a person wearing a denim jacket, with their head out of the frame, on a grey solid color background.",
         num_inference_steps: 4,
         guidance_scale: 1
       };
