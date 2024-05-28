@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom"
 import {Row,Col} from "react-bootstrap"
 import { useDispatch } from "react-redux";
 import { addItem } from "../store/store.js"
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import axios from 'axios';
 
 function Detail(props){
@@ -16,11 +16,14 @@ function Detail(props){
   const Clothing_style = ["Classic","Modern","Casual","Vintage","Street","Minimal"] 
   const Background_color = ["Balck","White","Green","Grey"]
 
-  var prompt = "A full-body shot of a person wearing a jacket, with their head out of the frame, on a grey solid color background."
+  var [prompt,setPrompt] = useState('')
   var [opt1,setOpt1]=useState('')//프롬프트 옵션1
   var [opt2,setOpt2]=useState('')//프롬프트 옵션2
   var [opt3,setOpt3]=useState('')//프롬프트 옵션3
 
+  useEffect(() => {
+    setPrompt(`${opt1} ${opt2} ${opt3} 입니다옹`);//최종 프롬프트
+  }, [opt1, opt2, opt3]);
 
   function onSetOpt1(a){
     setOpt1(a);
@@ -138,7 +141,7 @@ function Detail(props){
           <hr></hr>
           <h4>Q&A</h4>
           //여따가 Q&A
-          <PostRequestComponent opt1={opt1} opt2={opt2} opt3={opt3}/>
+          <PostRequestComponent prompt={prompt}/>
         </div>
       </div>
     )
@@ -202,10 +205,10 @@ function Detail(props){
     );
   }
   
-  const PostRequestComponent = (opt1,opt2,opt3) => {
+  const PostRequestComponent = (props) => {
     const handlePostRequest = async () => {
       const payload = {
-        prompt: "A full-body shot of a person wearing a jacket, with their head out of the frame, on a grey solid color background.",
+        prompt: props.prompt,
         num_inference_steps: 4,
         guidance_scale: 1,
       };
@@ -216,7 +219,7 @@ function Detail(props){
             'accept': 'image/*',
             'Content-Type': 'application/json'
           }
-        });
+        }); 
         console.log('Response:', response.data);
       } catch (error) {
         console.error('Error posting data:', error);
