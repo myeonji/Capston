@@ -1,6 +1,8 @@
 import {Container,Nav,Navbar,Row,Col,Form} from 'react-bootstrap';
 import './App.css';
-import { useState } from 'react';
+import { db } from './firebase';
+import { useEffect, useState } from 'react';
+import { doc, getDoc } from 'firebase/firestore';
 import data from './data.js';
 import { Routes,Route,Link,Outlet, useNavigate } from 'react-router-dom';
 import Detail from './routes/detail.js'
@@ -12,7 +14,32 @@ import Test from './routes/test.js'
 import { FaUser,FaHeart,FaShoppingBag } from "react-icons/fa";
 import { BiBorderRight } from 'react-icons/bi';
 
+// function App() {
+//   const [test, setTest] = useState()
+//   // async - await로 데이터 fetch 대기
+//   async function getTest() {
+//     // document에 대한 참조 생성
+//     const docRef = doc(db, "items", "1");
+//     // 참조에 대한 Snapshot 쿼리
+//     const docSnap = await getDoc(docRef);
 
+//     if (docSnap.exists()) {
+//       setTest(docSnap.data())
+//     }
+//   };
+//   // 최초 마운트 시에 getTest import
+//   useEffect(() => {
+//     getTest()
+//   }, [])
+//   return (
+//     <div>
+//         {test !== undefined &&
+//         <div>{test.name}</div>}
+//     </div>
+//   );
+// }
+
+// export default App;
 function App() {
 
   
