@@ -23,7 +23,7 @@ function Detail(props){
   var [opt3,setOpt3]=useState('')//프롬프트 옵션3
 
   useEffect(() => {
-    setPrompt(`A three-quarter full shot of a person wearing a ${opt2} jacket, with their head out of the frame, on a ${opt3} solid color background, in a ${opt1}"
+    setPrompt(`A full-body shot of a person wearing a ${opt2} jacket, with their head out of the frame, on a ${opt3} solid color background, in a ${opt1}"
       `);//최종 프롬프트
   }, [opt1, opt2, opt3]);
 
@@ -213,32 +213,39 @@ function Detail(props){
   }
   
   const PostRequestComponent = (props) => {
-    const handlePostRequest = async () => {
-      const payload = {
-        prompt: props.prompt,
-        num_inference_steps: 4,
-        guidance_scale: 1,
-      };
-      console.log(payload)
-      try {
-        const response = await axios.post('http://localhost:3000/txt2img', payload, {
-          headers: {
-            'accept': 'image/*',
-            'Content-Type': 'application/json'
-          }
-        }); 
-        console.log('Response:', response.data);
-      } catch (error) {
-        console.error('Error posting data:', error);
-      }
-    };
+    const [imageSrc, setImageSrc] = useState(null);
   
-    return (
-      <div>
-        <button className="AddCart" onClick={handlePostRequest}>Send POST Request</button>
-      </div>
-    );
-  };
+      const handlePostRequest = async () => {
+        const payload = {
+          prompt: props.prompt,
+          
+        };
+    
+        try {
+          const response = await axios.post('/txt2img', payload, {
+            headers: {
+              'accept': 'image/png',
+              'Content-Type': 'application/json'
+            },
+            responseType: 'blob'
+          });
+    
+          const blob = new Blob([response.data], { type: 'image/png' });
+          const imageUrl = URL.createObjectURL(blob);
+          setImageSrc(imageUrl);
+    
+        } catch (error) {
+          console.error('Error posting data:', error);
+        }
+      };
+    
+      return (
+        <div>
+          <button className="AddCart" onClick={handlePostRequest}>Send POST Request</button>
+          {imageSrc && <img src={imageSrc} alt="Generated" />}
+        </div>
+      );
+    };
 
 
 
