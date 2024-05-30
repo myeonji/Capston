@@ -12,8 +12,7 @@ sample_prompt = "A full-body shot of a person wearing a denim jacket, with their
     resources={
         "gpu": 1,
         "gpu_type": "nvidia-l4",
-        # You can also specify GPU memory requirement:
-        # "memory": "16Gi",
+        
     },
 )
 class SD:

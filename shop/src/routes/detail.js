@@ -86,7 +86,7 @@ function Detail(props){
           <Row>
             <Col>
             <Row xs={2} md={2}>
-              <Col>{opt1}</Col>
+              <Col>{opt1}</Col> 
               <Col>{opt2}</Col>
               <Col>{opt3}</Col>
               <Col>{prompt}</Col>
