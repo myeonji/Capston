@@ -27,10 +27,10 @@ let cart = createSlice({
     
       {
         id : 2,
-        title : "Grey Yordan",
+        title : "Gray Yordan",
         content : "Born in the States",
         price : 130000,
-        color : "Grey",
+        color : "Gray",
         count : 1,
         img : "https://codingapple1.github.io/shop/shoes3.jpg",
       },

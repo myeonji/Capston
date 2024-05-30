@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { addItem } from "../store/store.js"
 import { useState,useEffect } from "react";
 import axios from 'axios';
+import colornames from 'colornames';
 
 function Detail(props){
 
@@ -22,7 +23,8 @@ function Detail(props){
   var [opt3,setOpt3]=useState('')//프롬프트 옵션3
 
   useEffect(() => {
-    setPrompt(`${opt1} ${opt2} ${opt3} 입니다옹`);//최종 프롬프트
+    setPrompt(`A three-quarter full shot of a person wearing a ${opt2} jacket, with their head out of the frame, on a ${opt3} solid color background, in a ${opt1}"
+      `);//최종 프롬프트
   }, [opt1, opt2, opt3]);
 
   function onSetOpt1(a){
@@ -71,7 +73,7 @@ function Detail(props){
             <p>{'>'} SHIPPING & RETURNS</p>
           </div>
         </div> 
-        <div>
+        {/*<div>
           <hr></hr>
           <h4>RECOMMENDED</h4>
           <Row>
@@ -79,7 +81,7 @@ function Detail(props){
             <Col>2</Col>
             <Col>3</Col>
           </Row>
-        </div>
+        </div>*/}
         <div>
           <hr></hr>
           <h4>AI PICK</h4>
@@ -89,7 +91,7 @@ function Detail(props){
               <Col>{opt1}</Col> 
               <Col>{opt2}</Col>
               <Col>{opt3}</Col>
-              <Col>{prompt}</Col>
+              <Col></Col>
             </Row>
             </Col>
             <Col>
@@ -114,12 +116,15 @@ function Detail(props){
                 </div>
                 </Col>
               </Row>
+              <p>Selected Option : {prompt}</p>
+              <PostRequestComponent prompt={prompt}/>
             </div>
+            
               </Col>
           </Row>
-          
+          <ToneOnTone color={itemId.color} />
         </div>
-        <div>
+     {/* <div>
           <hr></hr>
           <h4>REVIEW</h4>
           <Row xs="auto" className="mb-5">
@@ -141,8 +146,8 @@ function Detail(props){
           <hr></hr>
           <h4>Q&A</h4>
           //여따가 Q&A
-          <PostRequestComponent prompt={prompt}/>
-        </div>
+          
+        </div>*/}
       </div>
     )
   }
@@ -188,7 +193,9 @@ function Detail(props){
                
             />
             {option}
+            
           </label>
+         
         </div>
       ));
     };
@@ -198,9 +205,9 @@ function Detail(props){
         <form onSubmit={handleSubmit}>
           <h4>{groupName}</h4>
           {renderRadioButtons(options)}
-          <button type="submit">Submit</button>
+          
         </form>
-        <p>Selected option: {selectedOption}</p>
+       
       </div>
     );
   }
@@ -228,8 +235,68 @@ function Detail(props){
   
     return (
       <div>
-        <button onClick={handlePostRequest}>Send POST Request</button>
+        <button className="AddCart" onClick={handlePostRequest}>Send POST Request</button>
       </div>
     );
   };
+
+
+
+
+  // 기본 색상과 흰색 사이의 색상을 보간하는 함수
+  const interpolateColor = (color, target, ratio) => {
+    return color.map((c, i) => Math.round(c + (target[i] - c) * ratio));
+  };
+  
+  // 톤온톤 색상 조합을 생성하는 함수
+  const generateToneOnToneColors = (baseColor, steps) => {
+    const white = [255, 255, 255];
+    return Array.from({ length: steps }, (_, i) => 
+      interpolateColor(baseColor, white, i / (steps - 1))
+    );
+  };
+  const hexToRgb = (hex) => {
+    const bigint = parseInt(hex.slice(1), 16);
+    return [(bigint >> 16) & 255, (bigint >> 8) & 255, bigint & 255];
+  };
+  // RGB 배열을 CSS 색상 문자열로 변환하는 함수
+  const rgbToString = (color) => {
+    return `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
+  };
+  
+  const ToneOnTone = (props) => {
+    const [baseColor, setBaseColor] = useState([100, 150, 30]);
+    const steps = 5;
+    const colors = generateToneOnToneColors(baseColor, steps);
+    
+    
+    const favoriteColor = colornames(props.color);//사용자가 선택한 색상
+
+    useEffect(() => {
+      // 컴포넌트가 마운트될 때 유저 데이터를 가져옴
+        const userColor = hexToRgb(favoriteColor);//rgb로 변환
+        setBaseColor(userColor);
+      },[]); 
+
+    return (
+      <div >
+        <h5>Tone-on-Tone Colors</h5>
+        <div style={{ display: 'flex', flexDirection: 'row' }}>
+          {colors.map((color, index) => (
+            <div 
+              key={index} 
+              style={{ 
+                backgroundColor: rgbToString(color), 
+                width: '50px', 
+                height: '50px' 
+              }} 
+            />
+          ))}
+        </div>
+        <hr/>
+      </div>
+     
+    );
+  };
+
   export default Detail;
